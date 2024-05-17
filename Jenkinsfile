@@ -13,13 +13,10 @@ pipeline {
         stage('Deploy War To Tomcat'){
             steps{
                 sshagent(['private-key']) {
-                    script{
+                   
                     def mavenPom = readMavenPom file: 'pom.xml'
-                    sh "scp 'file: "target/simple-app-${mavenPom.version}.war" /opt/"
-                    }
-    
+                    sh script: 'scp file: "target/simple-app-${mavenPom.version}.war" /opt/'
                 }
-                
             }
         }
     }
