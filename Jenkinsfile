@@ -12,8 +12,10 @@ pipeline {
         }
         stage('Deploy to Tomcat') {
             steps {
+                script {
+                    def mavenPom = readMavenPom file: 'pom.xml'
          sshagent(['targetnode-cred']) {
-         sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@ec2-3-91-44-157.compute-1.amazonaws.com:/opt/'
+         sh 'scp -o StrictHostKeyChecking=no file: "target/sample-app.${mavenPom.version}.war" ec2-user@ec2-3-91-44-157.compute-1.amazonaws.com:/opt/'
               }
            }
         }    
