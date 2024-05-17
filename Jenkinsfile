@@ -10,14 +10,5 @@ pipeline {
                  archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
             }
         }
-        stage('Deploy War To Tomcat'){
-            steps{
-                sshagent(['private-key']) {
-                   
-                    def mavenPom = readMavenPom file: 'pom.xml'
-                    sh script: 'scp file: "target/simple-app-${mavenPom.version}.war" /opt/'
-                }
-            }
-        }
     }
 }
