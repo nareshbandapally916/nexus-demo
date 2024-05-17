@@ -11,9 +11,11 @@ pipeline {
             }
         }
         stage('Deploy to Tomcat') {
+            step {
          sshagent(['private-key']) {
          sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@172.31.57.217:/opt/apache-tomcat-10.1.24/webapps/'
-      }
-   }
-        }
+              }
+           }
+        }    
     }
+}
