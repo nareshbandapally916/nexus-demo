@@ -16,7 +16,7 @@ pipeline {
                     def mavenPom = readMavenPom file: 'pom.xml'
          sshagent(['targetnode-cred']) {
              echo "This is version ${mavenPom.version} picking from pom.xml file"
-        // sh "scp -o StrictHostKeyChecking=no target/*-${mavenPom.version}.war ec2-user@ec2-3-91-44-157.compute-1.amazonaws.com:/opt/"
+            sh "scp -o StrictHostKeyChecking=no target/*-${mavenPom.version}.war ec2-user@ec2-3-91-44-157.compute-1.amazonaws.com:/opt/"
                   }
                }
             }    
