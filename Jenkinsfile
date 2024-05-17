@@ -10,5 +10,14 @@ pipeline {
                  archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
             }
         }
+        stage('Deploy to Server'){
+            steps {
+               
+                       sshagent (credentials: ['deploy-dev']) {
+                           sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-91-44-157.compute-1.amazonaws.com:/opt/'
+               
+                }
+            }
+        }
     }
 }
