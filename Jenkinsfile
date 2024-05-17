@@ -10,10 +10,10 @@ pipeline {
                  archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
             }
         }
-        stage('Deploy to Server'){
-           sshagent(['private-key']) {
-                 sh 'ssh -o StrictHostKeyChecking=no target/*.war ec2-user@ec2-3-91-44-157.compute-1.amazonaws.com:/opt/'
-                }
-            }
+        stage('Deploy to Tomcat') {
+         sshagent(['private-key']) {
+         sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@172.31.57.217:/opt/apache-tomcat-10.1.24/webapps/'
+      }
+   }
         }
     }
