@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Deploy to Tomcat') {
             steps {
-         sshagent(['private-key']) {
+         sshagent(['targetnode-cred']) {
          sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@ec2-3-91-44-157.compute-1.amazonaws.com:/opt/'
               }
            }
