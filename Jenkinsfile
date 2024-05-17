@@ -11,13 +11,9 @@ pipeline {
             }
         }
         stage('Deploy to Server'){
-            steps {
-               
-                       sshagent (credentials: ['private-key']) {
-                           sh 'ssh -o StrictHostKeyChecking=no target/*.war ec2-user@ec2-3-91-44-157.compute-1.amazonaws.com:/opt/'
-               
-                }
-            }
+            sshagent (credentials: ['private-key']) {
+                sh 'ssh -o StrictHostKeyChecking=no target/*.war ec2-user@ec2-3-91-44-157.compute-1.amazonaws.com:/opt/'
+               }
         }
     }
 }
